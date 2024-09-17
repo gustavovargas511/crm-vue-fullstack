@@ -17,10 +17,10 @@ const formData = ref({});
 
 onMounted(() => {
   UserService.getUser(id)
-    .then(({ data }) => {
+    .then((res) => {
       //   console.log(data);
       //   Object.assign(formData, data);
-      formData.value = data;
+      formData.value = res.data.data;
     })
     .catch((err) => console.log(err));
 });

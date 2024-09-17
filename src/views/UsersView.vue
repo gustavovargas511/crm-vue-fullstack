@@ -19,7 +19,7 @@ onMounted(() => {
   UserService.getUsers()
     .then((res) => {
       users.value = res.data.data;
-      console.log("Users:", users.value); // Check here
+      // console.log("Users:", users.value); // Check here
     })
     .catch((err) => console.log("Error: " + err));
 });

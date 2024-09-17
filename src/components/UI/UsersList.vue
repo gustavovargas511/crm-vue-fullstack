@@ -40,7 +40,7 @@ const statusText = computed(() => {
           :checked="props.user.active"
           @change="
             emits('c-update-active', {
-              id: props.user.id,
+              id: props.user._id,
               active: props.user.active,
             })
           "
