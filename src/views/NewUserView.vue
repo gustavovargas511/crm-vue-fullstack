@@ -15,13 +15,9 @@ defineProps({
 
 const handleUserSubmit = (data) => {
   // Formkit implements preventDefault() by default
-  // console.log("Warding...", data);
   data.active = 1;
   UserService.addUser(data)
     .then((res) => {
-      //console.log(res)
-      //redirect:
-      // router.push("/");
       router.push({ name: "users-list" });
     })
     .catch((err) => console.log("Data not added, " + err));
@@ -29,74 +25,95 @@ const handleUserSubmit = (data) => {
 </script>
 
 <template>
-  <div>
-    <div class="flex justify-end">
-      <!-- <RouterLink to="/new-user">  -->
+  <div class="container mx-auto p-6">
+    <div class="flex justify-end mb-4">
       <RouterLinkBtn toLink="users-list"> Back to Users list </RouterLinkBtn>
     </div>
-    <Heading>{{ title }}</Heading>
-    <!-- <h1 class="text-4xl font-extrabold text-gray-500">Add New User</h1> -->
 
-    <div class="mx-auto mt-10 bg-gray-100 shadow">
-      <div class="mx-auto md:w-2/3 py-20 px-6">
+    <Heading>{{ title }}</Heading>
+
+    <div class="mt-10 bg-white rounded-lg shadow-md p-6 md:w-2/3 mx-auto">
+      <FormKit
+        type="form"
+        submit-label="Add User"
+        :submit-attrs="{
+          help: 'Click to save the user',
+        }"
+        @submit="handleUserSubmit"
+        class="space-y-6"
+      >
+        <!-- Name Input -->
         <FormKit
-          type="form"
-          submit-label="Add User"
-          :submit-attrs="{
-            help: 'Click to save the user',
-          }"
-          @submit="handleUserSubmit"
-        >
-          <FormKit
-            type="text"
-            label="Name"
-            name="userName"
-            placeholder="User name"
-            validation="required"
-            :validation-messages="{ required: 'User name is required' }"
-            validation-visibility="submit"
-          />
-          <FormKit
-            type="text"
-            label="Last Name"
-            name="lastName"
-            placeholder="Last Name"
-            validation="required"
-            :validation-messages="{ required: 'User Last Name is required' }"
-            validation-visibility="submit"
-          />
-          <FormKit
-            type="email"
-            label="Email"
-            name="email"
-            placeholder="Email"
-            validation="required|email"
-            :validation-messages="{ required: 'User Email is required' }"
-            validation-visibility="submit"
-          />
-          <FormKit
-            type="text"
-            label="Phone #"
-            name="phoneNumber"
-            placeholder="Phone: XXX-XXX-XXXX"
-            validation="required|matches:/^\d{3}-\d{3}-\d{4}$/"
-            :validation-messages="{ required: 'Phone # is required' }"
-            validation-visibility="submit"
-          />
-          <FormKit
-            type="text"
-            label="Company"
-            name="company"
-            placeholder="Company"
-          />
-          <FormKit
-            type="text"
-            label="Job Title"
-            name="jobTitle"
-            placeholder="Job Title"
-          />
-        </FormKit>
-      </div>
+          type="text"
+          label="Name"
+          name="userName"
+          placeholder="User name"
+          validation="required"
+          :validation-messages="{ required: 'User name is required' }"
+          validation-visibility="submit"
+          input-class="block w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+          label-class="block text-sm font-medium text-gray-700"
+        />
+
+        <!-- Last Name Input -->
+        <FormKit
+          type="text"
+          label="Last Name"
+          name="lastName"
+          placeholder="Last Name"
+          validation="required"
+          :validation-messages="{ required: 'User Last Name is required' }"
+          validation-visibility="submit"
+          input-class="block w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+          label-class="block text-sm font-medium text-gray-700"
+        />
+
+        <!-- Email Input -->
+        <FormKit
+          type="email"
+          label="Email"
+          name="email"
+          placeholder="Email"
+          validation="required|email"
+          :validation-messages="{ required: 'User Email is required' }"
+          validation-visibility="submit"
+          input-class="block w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+          label-class="block text-sm font-medium text-gray-700"
+        />
+
+        <!-- Phone Number Input -->
+        <FormKit
+          type="text"
+          label="Phone #"
+          name="phoneNumber"
+          placeholder="Phone: XXX-XXX-XXXX"
+          validation="required|matches:/^\\d{3}-\\d{3}-\\d{4}$/"
+          :validation-messages="{ required: 'Phone # is required' }"
+          validation-visibility="submit"
+          input-class="block w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+          label-class="block text-sm font-medium text-gray-700"
+        />
+
+        <!-- Company Input -->
+        <FormKit
+          type="text"
+          label="Company"
+          name="company"
+          placeholder="Company"
+          input-class="block w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+          label-class="block text-sm font-medium text-gray-700"
+        />
+
+        <!-- Job Title Input -->
+        <FormKit
+          type="text"
+          label="Job Title"
+          name="jobTitle"
+          placeholder="Job Title"
+          input-class="block w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+          label-class="block text-sm font-medium text-gray-700"
+        />
+      </FormKit>
     </div>
   </div>
 </template>
